@@ -64,7 +64,7 @@ export default function HomePage() {
       </header>
 
       {/* Hero */}
-      <section className="relative overflow-hidden bg-stone-900 px-4 py-20 md:py-36">
+      <section className="relative overflow-hidden bg-stone-900 px-4 py-10 md:py-16">
         <div className="absolute inset-0 bg-gradient-to-r from-stone-900 via-stone-900/80 to-transparent" />
         <div className="relative mx-auto max-w-6xl">
           <p className="text-xs font-semibold uppercase tracking-widest text-red-400 sm:text-sm">Dřevozpracující provoz</p>
@@ -86,11 +86,11 @@ export default function HomePage() {
       </section>
 
       {/* Služby */}
-      <section className="mx-auto max-w-6xl px-4 py-12 md:py-16">
-        <h2 className="mb-6 text-xl font-bold text-stone-900 sm:text-2xl">Naše služby</h2>
+      <section className="mx-auto max-w-6xl px-4 py-8 md:py-10">
+        <h2 className="mb-4 text-xl font-bold text-stone-900 sm:text-2xl">Naše služby</h2>
         <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
           {SERVICES.map((s) => (
-            <Link key={s.href} href={s.href} className={"group relative flex h-40 flex-col justify-end overflow-hidden rounded-xl p-4 sm:h-52 sm:p-5 " + s.bg}>
+            <Link key={s.href} href={s.href} className={"group relative flex h-36 flex-col justify-end overflow-hidden rounded-xl p-4 sm:h-44 sm:p-5 " + s.bg}>
               <span className="absolute right-3 top-3 text-2xl opacity-30 sm:right-4 sm:top-4 sm:text-3xl">{s.emoji}</span>
               <p className="text-xs text-white/60">{s.desc}</p>
               <h3 className="mt-1 text-sm font-bold text-white sm:text-lg">{s.label}</h3>
@@ -101,7 +101,7 @@ export default function HomePage() {
       </section>
 
       {/* Proč my */}
-      <section className="bg-stone-50 px-4 py-12 md:py-16">
+      <section className="bg-stone-50 px-4 py-8 md:py-10">
         <div className="mx-auto max-w-6xl">
           <h2 className="mb-8 text-xl font-bold text-stone-900 sm:text-2xl">Proč si vybrat nás</h2>
           <div className="grid gap-6 sm:grid-cols-3">
