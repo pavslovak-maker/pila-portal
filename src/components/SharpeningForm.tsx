@@ -15,8 +15,8 @@ const formSchema = sharpeningPayload.extend({
 });
 type FormValues = z.infer<typeof formSchema>;
 
-const inp = { style: { width: "100%", padding: "12px 16px", fontSize: 15, borderRadius: 12, border: "1px solid #d2d2d7", background: "#fff", color: "#1d1d1f", outline: "none", boxSizing: "border-box" as const, fontFamily: "inherit" }};
-const lbl = { style: { display: "block", fontSize: 14, fontWeight: 500, color: "#1d1d1f", marginBottom: 8 }};
+const inp = { style: { width: "100%", padding: "12px 16px", fontSize: 15, borderRadius: 12, border: "1px solid #c8bfb0", background: "white", color: "#1a3a2a", outline: "none", boxSizing: "border-box" as const, fontFamily: "var(--font-body)", borderRadius: 0 }};
+const lbl = { style: { display: "block", fontSize: 12, fontWeight: 600, color: "#1a3a2a", marginBottom: 8, textTransform: "uppercase", letterSpacing: "0.06em", fontFamily: "var(--font-heading)" }};
 
 export function SharpeningForm() {
   const [submitted, setSubmitted] = useState(false);
@@ -98,7 +98,7 @@ export function SharpeningForm() {
 
       {serverError && <div style={{ background: "#fff2f2", border: "1px solid #ffc5c5", borderRadius: 12, padding: "12px 16px", fontSize: 14, color: "#cc0000" }}>{serverError}</div>}
 
-      <button type="submit" disabled={isSubmitting} style={{ width: "100%", padding: "16px", background: isSubmitting ? "#999" : "#0071e3", color: "white", border: "none", borderRadius: 980, fontSize: 16, fontWeight: 500, cursor: isSubmitting ? "not-allowed" : "pointer", fontFamily: "inherit" }}>
+      <button type="submit" disabled={isSubmitting} style={{ width: "100%", padding: "16px", background: isSubmitting ? "#999" : "#c8441b", color: "white", border: "none", borderRadius: 0, fontSize: 14, letterSpacing: "0.08em", textTransform: "uppercase" as const, fontWeight: 700, fontWeight: 500, cursor: isSubmitting ? "not-allowed" : "pointer", fontFamily: "inherit" }}>
         {isSubmitting ? "Odesílám…" : "Odeslat poptávku"}
       </button>
     </form>

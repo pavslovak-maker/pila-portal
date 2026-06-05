@@ -1,15 +1,12 @@
 import { SharpeningForm } from "@/components/SharpeningForm";
 import { PageLayout } from "@/components/PageLayout";
-
-export const metadata = { title: "Ostření kotoučů | Pila", description: "Ostření pilových kotoučů a pásů." };
-
-export default function SharpeningPage() {
+export const metadata = { title: "Ostření kotoučů | Pila" };
+export default function Page() {
   return (
     <PageLayout>
-      <h1 style={{ fontSize: "clamp(28px, 5vw, 40px)", fontWeight: 700, letterSpacing: "-0.03em", color: "#1d1d1f", marginBottom: 12 }}>Ostření pilových kotoučů a pásů</h1>
-      <p style={{ fontSize: 17, color: "#6e6e73", lineHeight: 1.6, marginBottom: 40 }}>
-        Naostříme kotouče i pásy. Přivezte k nám — hotové vrátíme zpravidla druhý den.
-      </p>
+      <p style={{ fontFamily: "var(--font-heading)", fontSize: 12, fontWeight: 600, color: "#c8441b", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 12 }}>Poptávka</p>
+      <h1 style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(28px, 5vw, 44px)", fontWeight: 700, textTransform: "uppercase", color: "#1a3a2a", letterSpacing: "-0.01em", marginBottom: 16 }}>Ostření kotoučů a pásů</h1>
+      <p style={{ fontSize: 16, color: "#4a5e4f", lineHeight: 1.7, marginBottom: 40 }}>Naostříme kotouče i pásy. Přivezte k nám — hotové vrátíme zpravidla druhý den.</p>
       <SharpeningForm />
     </PageLayout>
   );

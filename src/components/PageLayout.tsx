@@ -5,8 +5,9 @@ import { useState } from "react";
 
 const PHONE = process.env.NEXT_PUBLIC_SITE_PHONE ?? "+420 000 000 000";
 const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME ?? "Pila";
+const g = "#1a3a2a", o = "#c8441b", cr = "#f5f0e8";
 
-const NAV_LINKS = [
+const NAV = [
   { href: "/porez", label: "Pořez dřeva" },
   { href: "/suseni", label: "Sušení" },
   { href: "/palivo", label: "Palivo" },
@@ -14,50 +15,42 @@ const NAV_LINKS = [
 ];
 
 export function PageLayout({ children }: { children: React.ReactNode }) {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [menu, setMenu] = useState(false);
 
   return (
-    <div className="min-h-screen" style={{ background: "#f5f5f7", fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" }}>
-      {/* Nav */}
-      <header style={{ background: "rgba(255,255,255,0.85)", backdropFilter: "saturate(180%) blur(20px)", borderBottom: "1px solid #d2d2d7", position: "sticky", top: 0, zIndex: 50 }}>
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-          <Link href="/" style={{ fontSize: 18, fontWeight: 600, color: "#1d1d1f", letterSpacing: "-0.02em", textDecoration: "none" }}>
-            {SITE_NAME}
+    <div style={{ minHeight: "100vh", background: cr, fontFamily: "var(--font-body)" }}>
+      <div style={{ background: o, color: "white", textAlign: "center", padding: "8px", fontSize: 13, fontWeight: 500, letterSpacing: "0.05em" }}>
+        Zavolejte nám: {PHONE}
+      </div>
+      <header style={{ background: cr, borderBottom: `1px solid #d9d0c2`, position: "sticky", top: 0, zIndex: 50 }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px", display: "flex", alignItems: "center", justifyContent: "space-between", height: 64 }}>
+          <Link href="/" style={{ textDecoration: "none" }}>
+            <div style={{ background: g, color: "white", padding: "8px 14px", lineHeight: 1.1 }}>
+              <div style={{ fontFamily: "var(--font-heading)", fontSize: 15, fontWeight: 700, letterSpacing: "0.08em" }}>{SITE_NAME.toUpperCase()}</div>
+              <div style={{ fontFamily: "var(--font-heading)", fontSize: 11, fontWeight: 400, color: o, letterSpacing: "0.15em" }}>DŘEVOZPRACUJÍCÍ PROVOZ</div>
+            </div>
           </Link>
-          <nav className="hidden md:flex" style={{ gap: 32 }}>
-            {NAV_LINKS.map((l) => (
-              <Link key={l.href} href={l.href} style={{ fontSize: 14, color: "#6e6e73", textDecoration: "none", fontWeight: 400 }}>
-                {l.label}
-              </Link>
-            ))}
+          <nav className="hidden md:flex" style={{ gap: 28 }}>
+            {NAV.map(l => <Link key={l.href} href={l.href} style={{ textDecoration: "none", fontSize: 13, fontWeight: 500, color: g, textTransform: "uppercase", letterSpacing: "0.04em" }}>{l.label}</Link>)}
           </nav>
-          <div className="flex items-center gap-4">
-            <a href={"tel:" + PHONE.replace(/\s/g, "")} className="hidden sm:block" style={{ fontSize: 14, fontWeight: 500, color: "#0071e3", textDecoration: "none" }}>
-              {PHONE}
-            </a>
-            <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden" style={{ background: "none", border: "none", cursor: "pointer", padding: 4 }}>
-              <div style={{ width: 22, display: "flex", flexDirection: "column", gap: 5 }}>
-                <span style={{ display: "block", height: 1.5, background: "#1d1d1f", borderRadius: 1, transform: menuOpen ? "translateY(6.5px) rotate(45deg)" : "none", transition: "transform 0.2s" }} />
-                <span style={{ display: "block", height: 1.5, background: "#1d1d1f", borderRadius: 1, opacity: menuOpen ? 0 : 1, transition: "opacity 0.2s" }} />
-                <span style={{ display: "block", height: 1.5, background: "#1d1d1f", borderRadius: 1, transform: menuOpen ? "translateY(-6.5px) rotate(-45deg)" : "none", transition: "transform 0.2s" }} />
+          <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+            <Link href="/suseni" className="hidden sm:block" style={{ background: o, color: "white", padding: "10px 20px", fontSize: 13, fontWeight: 700, textDecoration: "none", textTransform: "uppercase", letterSpacing: "0.06em" }}>
+              Poptávka zdarma
+            </Link>
+            <button onClick={() => setMenu(!menu)} className="md:hidden" style={{ background: "none", border: "none", cursor: "pointer" }}>
+              <div style={{ width: 24, display: "flex", flexDirection: "column", gap: 5 }}>
+                {[0,1,2].map(i => <span key={i} style={{ display: "block", height: 2, background: g, borderRadius: 1 }} />)}
               </div>
             </button>
           </div>
         </div>
-        {menuOpen && (
-          <div className="md:hidden" style={{ borderTop: "1px solid #d2d2d7", background: "rgba(255,255,255,0.97)", padding: "12px 24px 20px" }}>
-            {NAV_LINKS.map((l) => (
-              <Link key={l.href} href={l.href} onClick={() => setMenuOpen(false)} style={{ display: "block", padding: "12px 0", fontSize: 16, color: "#1d1d1f", textDecoration: "none", borderBottom: "1px solid #f2f2f2" }}>
-                {l.label}
-              </Link>
-            ))}
-            <a href={"tel:" + PHONE.replace(/\s/g, "")} style={{ display: "block", marginTop: 16, textAlign: "center", background: "#0071e3", color: "white", borderRadius: 980, padding: "12px 20px", fontSize: 14, fontWeight: 500, textDecoration: "none" }}>
-              {PHONE}
-            </a>
+        {menu && (
+          <div className="md:hidden" style={{ background: cr, borderTop: `1px solid #d9d0c2`, padding: "12px 24px 20px" }}>
+            {NAV.map(l => <Link key={l.href} href={l.href} onClick={() => setMenu(false)} style={{ display: "block", padding: "12px 0", fontSize: 14, fontWeight: 600, color: g, textDecoration: "none", borderBottom: "1px solid #e8e2d8", textTransform: "uppercase", letterSpacing: "0.05em" }}>{l.label}</Link>)}
           </div>
         )}
       </header>
-      <main className="mx-auto max-w-2xl px-6 py-14">
+      <main style={{ maxWidth: 680, margin: "0 auto", padding: "56px 24px" }}>
         {children}
       </main>
     </div>

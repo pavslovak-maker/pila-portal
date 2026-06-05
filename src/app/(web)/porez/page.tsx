@@ -1,15 +1,12 @@
 import { MillingForm } from "@/components/MillingForm";
 import { PageLayout } from "@/components/PageLayout";
-
-export const metadata = { title: "Pořez dřeva | Pila", description: "Pořez dřeva na zakázku." };
-
-export default function MillingPage() {
+export const metadata = { title: "Pořez dřeva | Pila" };
+export default function Page() {
   return (
     <PageLayout>
-      <h1 style={{ fontSize: "clamp(28px, 5vw, 40px)", fontWeight: 700, letterSpacing: "-0.03em", color: "#1d1d1f", marginBottom: 12 }}>Pořez dřeva na zakázku</h1>
-      <p style={{ fontSize: 17, color: "#6e6e73", lineHeight: 1.6, marginBottom: 40 }}>
-        Nařežeme vaše vlastní klády nebo dodáme hotové řezivo — prkna, fošny i hranoly. Cenu dohodnem telefonicky.
-      </p>
+      <p style={{ fontFamily: "var(--font-heading)", fontSize: 12, fontWeight: 600, color: "#c8441b", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 12 }}>Poptávka</p>
+      <h1 style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(28px, 5vw, 44px)", fontWeight: 700, textTransform: "uppercase", color: "#1a3a2a", letterSpacing: "-0.01em", marginBottom: 16 }}>Pořez dřeva na zakázku</h1>
+      <p style={{ fontSize: 16, color: "#4a5e4f", lineHeight: 1.7, marginBottom: 40 }}>Nařežeme vaše vlastní klády nebo dodáme hotové řezivo — prkna, fošny i hranoly. Cenu dohodnem telefonicky.</p>
       <MillingForm />
     </PageLayout>
   );

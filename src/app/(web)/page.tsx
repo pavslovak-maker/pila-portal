@@ -6,144 +6,123 @@ import { useState } from "react";
 const PHONE = process.env.NEXT_PUBLIC_SITE_PHONE ?? "+420 000 000 000";
 const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME ?? "Pila";
 
-const NAV_LINKS = [
+const NAV = [
   { href: "/porez", label: "Pořez dřeva" },
   { href: "/suseni", label: "Sušení" },
   { href: "/palivo", label: "Palivo" },
   { href: "/ostreni", label: "Ostření" },
-  { href: "/kontakt", label: "Kontakt" },
 ];
 
 const SERVICES = [
-  { href: "/porez", label: "Pořez dřeva", desc: "Nařežeme vaše klády nebo dodáme hotové řezivo přesně na míru." },
-  { href: "/suseni", label: "Sušení dřeva", desc: "Komorová sušárna s přesnou vlhkostí. Ideální pro truhláře i stavbaře." },
-  { href: "/palivo", label: "Palivo", desc: "Palivové dřevo, brikety, pelety a štěpka. Objednávka online." },
-  { href: "/ostreni", label: "Ostření kotoučů", desc: "Pilové kotouče i pásy. Přivezte — hotové vrátíme zpravidla druhý den." },
+  { href: "/porez", label: "Pořez dřeva", desc: "Klády i hotové řezivo na míru." },
+  { href: "/suseni", label: "Sušení dřeva", desc: "Komorová sušárna, přesná vlhkost." },
+  { href: "/palivo", label: "Palivo", desc: "Dřevo, brikety, pelety. Online." },
+  { href: "/ostreni", label: "Ostření kotoučů", desc: "Kotouče i pásy, druhý den hotovo." },
 ];
 
-const FEATURES = [
-  { title: "Rychlá odpověď", desc: "Ozveme se do 24 hodin od přijetí poptávky." },
-  { title: "Přesná práce", desc: "Řezivo na míru, sušení na požadovanou vlhkost." },
-  { title: "Férová cena", desc: "Cenu vždy dohodneme před zahájením práce." },
-];
-
-const apple = {
-  bg: "#f5f5f7",
-  white: "#ffffff",
-  text: "#1d1d1f",
-  gray: "#6e6e73",
-  lightGray: "#f2f2f2",
-  border: "#d2d2d7",
-  blue: "#0071e3",
-  font: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-};
+const g = "#1a3a2a", o = "#c8441b", cr = "#f5f0e8", gm = "#2d5a40";
 
 export default function HomePage() {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [menu, setMenu] = useState(false);
 
   return (
-    <div style={{ minHeight: "100vh", background: apple.bg, fontFamily: apple.font, color: apple.text }}>
+    <div style={{ height: "100vh", display: "flex", flexDirection: "column", background: cr, fontFamily: "var(--font-body)", overflow: "hidden" }}>
+
+      {/* Top bar */}
+      <div style={{ background: o, color: "white", textAlign: "center", padding: "6px 16px", fontSize: 12, fontWeight: 500, letterSpacing: "0.05em", flexShrink: 0 }}>
+        Zavolejte nám: <strong>{PHONE}</strong>
+      </div>
 
       {/* Nav */}
-      <header style={{ background: "rgba(255,255,255,0.85)", backdropFilter: "saturate(180%) blur(20px)", borderBottom: `1px solid ${apple.border}`, position: "sticky", top: 0, zIndex: 50 }}>
-        <div style={{ maxWidth: 980, margin: "0 auto", padding: "0 22px", display: "flex", alignItems: "center", justifyContent: "space-between", height: 52 }}>
-          <Link href="/" style={{ fontSize: 18, fontWeight: 600, color: apple.text, textDecoration: "none", letterSpacing: "-0.02em" }}>{SITE_NAME}</Link>
-          <nav className="hidden md:flex" style={{ gap: 28 }}>
-            {NAV_LINKS.map((l) => (
-              <Link key={l.href} href={l.href} style={{ fontSize: 13, color: apple.gray, textDecoration: "none" }}>{l.label}</Link>
-            ))}
+      <header style={{ background: cr, borderBottom: `1px solid #d9d0c2`, flexShrink: 0 }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px", display: "flex", alignItems: "center", justifyContent: "space-between", height: 56 }}>
+          <Link href="/" style={{ textDecoration: "none" }}>
+            <div style={{ background: g, color: "white", padding: "6px 12px", lineHeight: 1.15 }}>
+              <div style={{ fontFamily: "var(--font-heading)", fontSize: 14, fontWeight: 700, letterSpacing: "0.08em" }}>{SITE_NAME.toUpperCase()}</div>
+              <div style={{ fontFamily: "var(--font-heading)", fontSize: 10, fontWeight: 400, color: o, letterSpacing: "0.15em" }}>DŘEVOZPRACUJÍCÍ PROVOZ</div>
+            </div>
+          </Link>
+          <nav className="hidden md:flex" style={{ gap: 24, alignItems: "center" }}>
+            {NAV.map(l => <Link key={l.href} href={l.href} style={{ textDecoration: "none", fontSize: 12, fontWeight: 500, color: g, letterSpacing: "0.06em", textTransform: "uppercase" }}>{l.label}</Link>)}
           </nav>
-          <div className="flex items-center gap-4">
-            <a href={"tel:" + PHONE.replace(/\s/g, "")} className="hidden sm:block" style={{ fontSize: 13, color: apple.blue, textDecoration: "none", fontWeight: 400 }}>{PHONE}</a>
-            <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden" style={{ background: "none", border: "none", cursor: "pointer", padding: 4 }}>
-              <div style={{ width: 20, display: "flex", flexDirection: "column", gap: 5 }}>
-                <span style={{ display: "block", height: 1.5, background: apple.text, borderRadius: 1, transform: menuOpen ? "translateY(6.5px) rotate(45deg)" : "none", transition: "transform 0.2s" }} />
-                <span style={{ display: "block", height: 1.5, background: apple.text, borderRadius: 1, opacity: menuOpen ? 0 : 1, transition: "opacity 0.2s" }} />
-                <span style={{ display: "block", height: 1.5, background: apple.text, borderRadius: 1, transform: menuOpen ? "translateY(-6.5px) rotate(-45deg)" : "none", transition: "transform 0.2s" }} />
+          <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+            <Link href="/suseni" className="hidden sm:block" style={{ background: o, color: "white", padding: "8px 16px", fontSize: 12, fontWeight: 700, textDecoration: "none", letterSpacing: "0.06em", textTransform: "uppercase" }}>
+              Poptávka zdarma
+            </Link>
+            <button onClick={() => setMenu(!menu)} className="md:hidden" style={{ background: "none", border: "none", cursor: "pointer", padding: 4 }}>
+              <div style={{ width: 22, display: "flex", flexDirection: "column", gap: 5 }}>
+                {[0,1,2].map(i => <span key={i} style={{ display: "block", height: 2, background: g, borderRadius: 1 }} />)}
               </div>
             </button>
           </div>
         </div>
-        {menuOpen && (
-          <div className="md:hidden" style={{ borderTop: `1px solid ${apple.border}`, background: "rgba(255,255,255,0.97)", padding: "10px 22px 18px" }}>
-            {NAV_LINKS.map((l) => (
-              <Link key={l.href} href={l.href} onClick={() => setMenuOpen(false)} style={{ display: "block", padding: "12px 0", fontSize: 16, color: apple.text, textDecoration: "none", borderBottom: `1px solid ${apple.lightGray}` }}>{l.label}</Link>
-            ))}
-            <a href={"tel:" + PHONE.replace(/\s/g, "")} style={{ display: "block", marginTop: 14, textAlign: "center", background: apple.blue, color: "white", borderRadius: 980, padding: "12px", fontSize: 14, fontWeight: 500, textDecoration: "none" }}>{PHONE}</a>
+        {menu && (
+          <div className="md:hidden" style={{ background: cr, borderTop: `1px solid #d9d0c2`, padding: "10px 24px 16px" }}>
+            {NAV.map(l => <Link key={l.href} href={l.href} onClick={() => setMenu(false)} style={{ display: "block", padding: "10px 0", fontSize: 14, fontWeight: 600, color: g, textDecoration: "none", borderBottom: "1px solid #e8e2d8", textTransform: "uppercase", letterSpacing: "0.05em" }}>{l.label}</Link>)}
+            <Link href="/suseni" style={{ display: "block", marginTop: 12, textAlign: "center", background: o, color: "white", padding: "12px", fontSize: 13, fontWeight: 700, textDecoration: "none", letterSpacing: "0.06em", textTransform: "uppercase" }}>Poptávka zdarma</Link>
           </div>
         )}
       </header>
 
-      {/* Hero */}
-      <section style={{ background: apple.white, padding: "80px 22px 70px", textAlign: "center" }}>
-        <p style={{ fontSize: 13, fontWeight: 500, color: apple.blue, letterSpacing: "0.05em", textTransform: "uppercase", marginBottom: 14 }}>Dřevozpracující provoz</p>
-        <h1 style={{ fontSize: "clamp(36px, 6vw, 64px)", fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1.05, color: apple.text, margin: "0 auto 20px", maxWidth: 700 }}>
-          Pořez, sušení<br />a palivo.
-        </h1>
-        <p style={{ fontSize: 19, color: apple.gray, maxWidth: 500, margin: "0 auto 36px", lineHeight: 1.5 }}>
-          Pracujeme rychle a přesně. Poptávku přijmeme online — odpovíme do 24 hodin.
-        </p>
-        <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
-          <Link href="/suseni" style={{ background: apple.blue, color: "white", padding: "14px 28px", borderRadius: 980, fontSize: 15, fontWeight: 500, textDecoration: "none", display: "inline-block" }}>
-            Odeslat poptávku
-          </Link>
-          <a href={"tel:" + PHONE.replace(/\s/g, "")} style={{ background: apple.lightGray, color: apple.text, padding: "14px 28px", borderRadius: 980, fontSize: 15, fontWeight: 500, textDecoration: "none", display: "inline-block" }}>
-            {PHONE}
-          </a>
-        </div>
-      </section>
+      {/* Hlavní obsah — flex grow, vyplní zbytek výšky */}
+      <div style={{ flex: 1, overflow: "hidden", display: "grid", gridTemplateColumns: "1fr 1fr" }} className="main-grid">
 
-      {/* Dlaždice */}
-      <section style={{ maxWidth: 980, margin: "0 auto", padding: "64px 22px" }}>
-        <h2 style={{ fontSize: 28, fontWeight: 700, letterSpacing: "-0.02em", marginBottom: 28, color: apple.text }}>Naše služby</h2>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
-          {SERVICES.map((s) => (
-            <Link key={s.href} href={s.href} style={{ display: "flex", flexDirection: "column", background: apple.white, borderRadius: 18, padding: "28px 24px", textDecoration: "none", border: `1px solid ${apple.border}`, transition: "box-shadow 0.2s" }}>
-              <h3 style={{ fontSize: 17, fontWeight: 600, color: apple.text, marginBottom: 10 }}>{s.label}</h3>
-              <p style={{ fontSize: 14, color: apple.gray, lineHeight: 1.5, flex: 1 }}>{s.desc}</p>
-              <span style={{ marginTop: 16, fontSize: 14, color: apple.blue, fontWeight: 400 }}>Více info →</span>
+        {/* Levá strana — hero text */}
+        <div style={{ background: cr, display: "flex", flexDirection: "column", justifyContent: "center", padding: "40px 48px", overflow: "hidden" }}>
+          <p style={{ fontFamily: "var(--font-heading)", fontSize: 11, fontWeight: 600, color: o, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 6, marginTop: -12 }}>Profesionální dřevovýroba · Od roku 2000</p>
+          <h1 style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(28px, 3.8vw, 52px)", fontWeight: 700, lineHeight: 1.25, color: g, textTransform: "uppercase", letterSpacing: "-0.01em", marginBottom: 20 }}>
+            POŘEZ,<br />SUŠENÍ<br /><span style={{ color: o }}>&amp; PALIVO.</span>
+          </h1>
+          <p style={{ fontSize: 15, color: "#4a5e4f", lineHeight: 1.7, marginBottom: 32, maxWidth: 380 }}>
+            Poptávku přijmeme online — ozveme se do 24 hodin s cenou. Každá zakázka zpracována přesně a načas.
+          </p>
+          <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+            <Link href="/suseni" style={{ background: o, color: "white", padding: "13px 26px", fontSize: 13, fontWeight: 700, textDecoration: "none", textTransform: "uppercase", letterSpacing: "0.08em" }}>
+              Poptávka zdarma
             </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* Features */}
-      <section style={{ background: apple.white, padding: "64px 22px" }}>
-        <div style={{ maxWidth: 980, margin: "0 auto" }}>
-          <h2 style={{ fontSize: 28, fontWeight: 700, letterSpacing: "-0.02em", marginBottom: 36, color: apple.text }}>Proč si vybrat nás</h2>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 32 }}>
-            {FEATURES.map((f) => (
-              <div key={f.title}>
-                <h3 style={{ fontSize: 17, fontWeight: 600, color: apple.text, marginBottom: 8 }}>{f.title}</h3>
-                <p style={{ fontSize: 14, color: apple.gray, lineHeight: 1.6 }}>{f.desc}</p>
+            <a href={"tel:" + PHONE.replace(/\s/g, "")} style={{ background: "transparent", color: g, border: `2px solid ${g}`, padding: "13px 26px", fontSize: 13, fontWeight: 700, textDecoration: "none", textTransform: "uppercase", letterSpacing: "0.08em" }}>
+              Zavolat
+            </a>
+          </div>
+          {/* Spodní info */}
+          <div style={{ marginTop: "auto", paddingTop: 32, display: "flex", gap: 32, borderTop: `1px solid #d9d0c2`, marginTop: 40 }}>
+            {[{ n: "24h", t: "Odpověď" }, { n: "100%", t: "Přesnost" }, { n: "∞", t: "Férová cena" }].map(f => (
+              <div key={f.n}>
+                <div style={{ fontFamily: "var(--font-heading)", fontSize: 22, fontWeight: 700, color: g }}>{f.n}</div>
+                <div style={{ fontSize: 11, color: "#6b7c6e", textTransform: "uppercase", letterSpacing: "0.08em" }}>{f.t}</div>
               </div>
             ))}
           </div>
         </div>
-      </section>
 
-      {/* CTA */}
-      <section style={{ padding: "80px 22px", textAlign: "center", background: apple.bg }}>
-        <h2 style={{ fontSize: 28, fontWeight: 700, letterSpacing: "-0.02em", color: apple.text, marginBottom: 10 }}>Máte otázku?</h2>
-        <p style={{ fontSize: 17, color: apple.gray, marginBottom: 28 }}>Jsme k dispozici v pracovní dny.</p>
-        <a href={"tel:" + PHONE.replace(/\s/g, "")} style={{ background: apple.blue, color: "white", padding: "14px 32px", borderRadius: 980, fontSize: 15, fontWeight: 500, textDecoration: "none", display: "inline-block" }}>
-          Zavolat: {PHONE}
-        </a>
-      </section>
-
-      {/* Footer */}
-      <footer style={{ borderTop: `1px solid ${apple.border}`, padding: "32px 22px", background: apple.bg }}>
-        <div style={{ maxWidth: 980, margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 16 }}>
-          <p style={{ fontSize: 13, color: apple.gray }}>© 2025 {SITE_NAME}</p>
-          <div style={{ display: "flex", gap: 24 }}>
-            {NAV_LINKS.map((l) => (
-              <Link key={l.href} href={l.href} style={{ fontSize: 13, color: apple.gray, textDecoration: "none" }}>{l.label}</Link>
+        {/* Pravá strana — tmavě zelená, seznam služeb */}
+        <div style={{ background: g, display: "flex", flexDirection: "column", justifyContent: "center", padding: "40px 48px", position: "relative", overflow: "hidden" }}>
+          <div style={{ position: "absolute", right: -60, bottom: -60, width: 280, height: 280, borderRadius: "50%", background: gm, opacity: 0.35 }} />
+          <div style={{ position: "relative", zIndex: 1 }}>
+            <p style={{ fontFamily: "var(--font-heading)", color: o, fontSize: 11, fontWeight: 600, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 28 }}>Naše služby</p>
+            {SERVICES.map((s, i) => (
+              <Link key={s.href} href={s.href} style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", textDecoration: "none", borderTop: i === 0 ? `1px solid rgba(255,255,255,0.12)` : `1px solid rgba(255,255,255,0.12)`, padding: "18px 0", gap: 16 }}>
+                <div>
+                  <div style={{ fontFamily: "var(--font-heading)", fontSize: 18, fontWeight: 600, color: "white", textTransform: "uppercase", letterSpacing: "0.03em", marginBottom: 3 }}>{s.label}</div>
+                  <div style={{ fontSize: 12, color: "rgba(255,255,255,0.5)" }}>{s.desc}</div>
+                </div>
+                <span style={{ color: o, fontSize: 18, flexShrink: 0 }}>→</span>
+              </Link>
             ))}
-            <Link href="/admin" style={{ fontSize: 13, color: apple.gray, textDecoration: "none" }}>Admin</Link>
+            <div style={{ borderTop: `1px solid rgba(255,255,255,0.12)`, paddingTop: 20, marginTop: 4 }}>
+              <a href={"tel:" + PHONE.replace(/\s/g, "")} style={{ fontFamily: "var(--font-heading)", fontSize: 14, fontWeight: 600, color: o, textDecoration: "none", letterSpacing: "0.06em", textTransform: "uppercase" }}>
+                📞 {PHONE}
+              </a>
+            </div>
           </div>
         </div>
-      </footer>
+      </div>
 
+      <style>{`
+        @media (max-width: 768px) {
+          .main-grid { grid-template-columns: 1fr !important; overflow-y: auto !important; }
+        }
+      `}</style>
     </div>
   );
 }
