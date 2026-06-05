@@ -15,101 +15,107 @@ const NAV_LINKS = [
 ];
 
 const SERVICES = [
-  { href: "/porez", label: "Pořez dřeva", desc: "Na zakázku, přesně na míru", bg: "bg-stone-800", emoji: "🪚" },
-  { href: "/suseni", label: "Sušení dřeva", desc: "Komorová sušárna, přesná vlhkost", bg: "bg-stone-700", emoji: "🌡️" },
-  { href: "/palivo", label: "Palivo", desc: "Dřevo, brikety, pelety, štěpka", bg: "bg-stone-900", emoji: "🪵" },
-  { href: "/ostreni", label: "Ostření kotoučů", desc: "Kotouče i pásy, druhý den hotovo", bg: "bg-stone-600", emoji: "⚙️" },
+  { href: "/porez", label: "Pořez dřeva", desc: "Nařežeme vaše klády nebo dodáme hotové řezivo přesně na míru." },
+  { href: "/suseni", label: "Sušení dřeva", desc: "Komorová sušárna s přesnou vlhkostí. Ideální pro truhláře i stavbaře." },
+  { href: "/palivo", label: "Palivo", desc: "Palivové dřevo, brikety, pelety a štěpka. Objednávka online." },
+  { href: "/ostreni", label: "Ostření kotoučů", desc: "Pilové kotouče i pásy. Přivezte — hotové vrátíme zpravidla druhý den." },
 ];
 
 const FEATURES = [
-  { icon: "⏱️", title: "Rychlá odpověď", desc: "Ozveme se do 24 hodin od přijetí poptávky." },
-  { icon: "📐", title: "Přesná práce", desc: "Řezivo na míru, sušení na požadovanou vlhkost." },
-  { icon: "🤝", title: "Férová cena", desc: "Cenu vždy dohodneme před zahájením práce." },
+  { title: "Rychlá odpověď", desc: "Ozveme se do 24 hodin od přijetí poptávky." },
+  { title: "Přesná práce", desc: "Řezivo na míru, sušení na požadovanou vlhkost." },
+  { title: "Férová cena", desc: "Cenu vždy dohodneme před zahájením práce." },
 ];
+
+const apple = {
+  bg: "#f5f5f7",
+  white: "#ffffff",
+  text: "#1d1d1f",
+  gray: "#6e6e73",
+  lightGray: "#f2f2f2",
+  border: "#d2d2d7",
+  blue: "#0071e3",
+  font: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+};
 
 export default function HomePage() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div style={{ minHeight: "100vh", background: apple.bg, fontFamily: apple.font, color: apple.text }}>
 
-      {/* Navigace */}
-      <header className="sticky top-0 z-50 border-b border-stone-200 bg-white shadow-sm">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
-          <Link href="/" className="text-xl font-bold tracking-tight text-stone-900">{SITE_NAME}</Link>
-          <nav className="hidden items-center gap-6 md:flex">
+      {/* Nav */}
+      <header style={{ background: "rgba(255,255,255,0.85)", backdropFilter: "saturate(180%) blur(20px)", borderBottom: `1px solid ${apple.border}`, position: "sticky", top: 0, zIndex: 50 }}>
+        <div style={{ maxWidth: 980, margin: "0 auto", padding: "0 22px", display: "flex", alignItems: "center", justifyContent: "space-between", height: 52 }}>
+          <Link href="/" style={{ fontSize: 18, fontWeight: 600, color: apple.text, textDecoration: "none", letterSpacing: "-0.02em" }}>{SITE_NAME}</Link>
+          <nav className="hidden md:flex" style={{ gap: 28 }}>
             {NAV_LINKS.map((l) => (
-              <Link key={l.href} href={l.href} className="text-sm font-medium text-stone-600 hover:text-red-600">{l.label}</Link>
+              <Link key={l.href} href={l.href} style={{ fontSize: 13, color: apple.gray, textDecoration: "none" }}>{l.label}</Link>
             ))}
           </nav>
-          <div className="flex items-center gap-3">
-            <a href={"tel:" + PHONE.replace(/\s/g, "")} className="hidden rounded bg-red-600 px-4 py-2 text-sm font-semibold text-white hover:bg-red-700 sm:block">
-              {PHONE}
-            </a>
-            <button onClick={() => setMenuOpen(!menuOpen)} className="flex h-9 w-9 flex-col items-center justify-center gap-1.5 md:hidden" aria-label="Menu">
-              <span className={"block h-0.5 w-6 bg-stone-700 transition-transform " + (menuOpen ? "translate-y-2 rotate-45" : "")} />
-              <span className={"block h-0.5 w-6 bg-stone-700 transition-opacity " + (menuOpen ? "opacity-0" : "")} />
-              <span className={"block h-0.5 w-6 bg-stone-700 transition-transform " + (menuOpen ? "-translate-y-2 -rotate-45" : "")} />
+          <div className="flex items-center gap-4">
+            <a href={"tel:" + PHONE.replace(/\s/g, "")} className="hidden sm:block" style={{ fontSize: 13, color: apple.blue, textDecoration: "none", fontWeight: 400 }}>{PHONE}</a>
+            <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden" style={{ background: "none", border: "none", cursor: "pointer", padding: 4 }}>
+              <div style={{ width: 20, display: "flex", flexDirection: "column", gap: 5 }}>
+                <span style={{ display: "block", height: 1.5, background: apple.text, borderRadius: 1, transform: menuOpen ? "translateY(6.5px) rotate(45deg)" : "none", transition: "transform 0.2s" }} />
+                <span style={{ display: "block", height: 1.5, background: apple.text, borderRadius: 1, opacity: menuOpen ? 0 : 1, transition: "opacity 0.2s" }} />
+                <span style={{ display: "block", height: 1.5, background: apple.text, borderRadius: 1, transform: menuOpen ? "translateY(-6.5px) rotate(-45deg)" : "none", transition: "transform 0.2s" }} />
+              </div>
             </button>
           </div>
         </div>
         {menuOpen && (
-          <div className="border-t border-stone-100 bg-white px-4 pb-4 md:hidden">
+          <div className="md:hidden" style={{ borderTop: `1px solid ${apple.border}`, background: "rgba(255,255,255,0.97)", padding: "10px 22px 18px" }}>
             {NAV_LINKS.map((l) => (
-              <Link key={l.href} href={l.href} onClick={() => setMenuOpen(false)} className="block py-3 text-base font-medium text-stone-700 hover:text-red-600">{l.label}</Link>
+              <Link key={l.href} href={l.href} onClick={() => setMenuOpen(false)} style={{ display: "block", padding: "12px 0", fontSize: 16, color: apple.text, textDecoration: "none", borderBottom: `1px solid ${apple.lightGray}` }}>{l.label}</Link>
             ))}
-            <a href={"tel:" + PHONE.replace(/\s/g, "")} className="mt-2 block rounded bg-red-600 px-4 py-3 text-center text-sm font-semibold text-white">{PHONE}</a>
+            <a href={"tel:" + PHONE.replace(/\s/g, "")} style={{ display: "block", marginTop: 14, textAlign: "center", background: apple.blue, color: "white", borderRadius: 980, padding: "12px", fontSize: 14, fontWeight: 500, textDecoration: "none" }}>{PHONE}</a>
           </div>
         )}
       </header>
 
       {/* Hero */}
-      <section className="relative overflow-hidden bg-stone-900 px-4 py-10 md:py-16">
-        <div className="absolute inset-0 bg-gradient-to-r from-stone-900 via-stone-900/80 to-transparent" />
-        <div className="relative mx-auto max-w-6xl">
-          <p className="text-xs font-semibold uppercase tracking-widest text-red-400 sm:text-sm">Dřevozpracující provoz</p>
-          <h1 className="mt-3 max-w-2xl text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl">
-            Pořez, sušení<br className="hidden sm:block" /> a palivo na jednom místě.
-          </h1>
-          <p className="mt-4 max-w-lg text-base text-stone-300 sm:text-lg">
-            Pracujeme rychle a přesně. Poptávku přijmeme online a ozveme se do 24 hodin s cenou.
-          </p>
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-            <Link href="/suseni" className="rounded bg-red-600 px-7 py-3 text-center text-sm font-semibold text-white hover:bg-red-700">
-              Odeslat poptávku
-            </Link>
-            <a href={"tel:" + PHONE.replace(/\s/g, "")} className="rounded border border-white/30 px-7 py-3 text-center text-sm font-semibold text-white hover:bg-white/10">
-              Zavolat: {PHONE}
-            </a>
-          </div>
+      <section style={{ background: apple.white, padding: "80px 22px 70px", textAlign: "center" }}>
+        <p style={{ fontSize: 13, fontWeight: 500, color: apple.blue, letterSpacing: "0.05em", textTransform: "uppercase", marginBottom: 14 }}>Dřevozpracující provoz</p>
+        <h1 style={{ fontSize: "clamp(36px, 6vw, 64px)", fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1.05, color: apple.text, margin: "0 auto 20px", maxWidth: 700 }}>
+          Pořez, sušení<br />a palivo.
+        </h1>
+        <p style={{ fontSize: 19, color: apple.gray, maxWidth: 500, margin: "0 auto 36px", lineHeight: 1.5 }}>
+          Pracujeme rychle a přesně. Poptávku přijmeme online — odpovíme do 24 hodin.
+        </p>
+        <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
+          <Link href="/suseni" style={{ background: apple.blue, color: "white", padding: "14px 28px", borderRadius: 980, fontSize: 15, fontWeight: 500, textDecoration: "none", display: "inline-block" }}>
+            Odeslat poptávku
+          </Link>
+          <a href={"tel:" + PHONE.replace(/\s/g, "")} style={{ background: apple.lightGray, color: apple.text, padding: "14px 28px", borderRadius: 980, fontSize: 15, fontWeight: 500, textDecoration: "none", display: "inline-block" }}>
+            {PHONE}
+          </a>
         </div>
       </section>
 
-      {/* Služby */}
-      <section className="mx-auto max-w-6xl px-4 py-8 md:py-10">
-        <h2 className="mb-4 text-xl font-bold text-stone-900 sm:text-2xl">Naše služby</h2>
-        <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+      {/* Dlaždice */}
+      <section style={{ maxWidth: 980, margin: "0 auto", padding: "64px 22px" }}>
+        <h2 style={{ fontSize: 28, fontWeight: 700, letterSpacing: "-0.02em", marginBottom: 28, color: apple.text }}>Naše služby</h2>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
           {SERVICES.map((s) => (
-            <Link key={s.href} href={s.href} className={"group relative flex h-36 flex-col justify-end overflow-hidden rounded-xl p-4 sm:h-44 sm:p-5 " + s.bg}>
-              <span className="absolute right-3 top-3 text-2xl opacity-30 sm:right-4 sm:top-4 sm:text-3xl">{s.emoji}</span>
-              <p className="text-xs text-white/60">{s.desc}</p>
-              <h3 className="mt-1 text-sm font-bold text-white sm:text-lg">{s.label}</h3>
-              <span className="mt-1 text-xs font-semibold text-red-400 group-hover:underline">Více info →</span>
+            <Link key={s.href} href={s.href} style={{ display: "flex", flexDirection: "column", background: apple.white, borderRadius: 18, padding: "28px 24px", textDecoration: "none", border: `1px solid ${apple.border}`, transition: "box-shadow 0.2s" }}>
+              <h3 style={{ fontSize: 17, fontWeight: 600, color: apple.text, marginBottom: 10 }}>{s.label}</h3>
+              <p style={{ fontSize: 14, color: apple.gray, lineHeight: 1.5, flex: 1 }}>{s.desc}</p>
+              <span style={{ marginTop: 16, fontSize: 14, color: apple.blue, fontWeight: 400 }}>Více info →</span>
             </Link>
           ))}
         </div>
       </section>
 
-      {/* Proč my */}
-      <section className="bg-stone-50 px-4 py-8 md:py-10">
-        <div className="mx-auto max-w-6xl">
-          <h2 className="mb-8 text-xl font-bold text-stone-900 sm:text-2xl">Proč si vybrat nás</h2>
-          <div className="grid gap-6 sm:grid-cols-3">
+      {/* Features */}
+      <section style={{ background: apple.white, padding: "64px 22px" }}>
+        <div style={{ maxWidth: 980, margin: "0 auto" }}>
+          <h2 style={{ fontSize: 28, fontWeight: 700, letterSpacing: "-0.02em", marginBottom: 36, color: apple.text }}>Proč si vybrat nás</h2>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 32 }}>
             {FEATURES.map((f) => (
-              <div key={f.title} className="rounded-xl bg-white p-6 shadow-sm">
-                <span className="text-3xl">{f.icon}</span>
-                <h3 className="mt-3 text-base font-bold text-stone-900">{f.title}</h3>
-                <p className="mt-1 text-sm leading-relaxed text-stone-500">{f.desc}</p>
+              <div key={f.title}>
+                <h3 style={{ fontSize: 17, fontWeight: 600, color: apple.text, marginBottom: 8 }}>{f.title}</h3>
+                <p style={{ fontSize: 14, color: apple.gray, lineHeight: 1.6 }}>{f.desc}</p>
               </div>
             ))}
           </div>
@@ -117,31 +123,23 @@ export default function HomePage() {
       </section>
 
       {/* CTA */}
-      <section className="bg-red-600 px-4 py-12 text-center">
-        <h2 className="text-xl font-bold text-white sm:text-2xl">Přijďte se podívat nebo zavolejte</h2>
-        <p className="mt-2 text-red-100">Jsme k dispozici v pracovní dny.</p>
-        <a href={"tel:" + PHONE.replace(/\s/g, "")} className="mt-5 inline-block rounded bg-white px-8 py-3 text-sm font-bold text-red-600 hover:bg-red-50">
-          {PHONE}
+      <section style={{ padding: "80px 22px", textAlign: "center", background: apple.bg }}>
+        <h2 style={{ fontSize: 28, fontWeight: 700, letterSpacing: "-0.02em", color: apple.text, marginBottom: 10 }}>Máte otázku?</h2>
+        <p style={{ fontSize: 17, color: apple.gray, marginBottom: 28 }}>Jsme k dispozici v pracovní dny.</p>
+        <a href={"tel:" + PHONE.replace(/\s/g, "")} style={{ background: apple.blue, color: "white", padding: "14px 32px", borderRadius: 980, fontSize: 15, fontWeight: 500, textDecoration: "none", display: "inline-block" }}>
+          Zavolat: {PHONE}
         </a>
       </section>
 
-      {/* Patička */}
-      <footer className="bg-stone-900 px-4 py-10">
-        <div className="mx-auto max-w-6xl">
-          <div className="flex flex-wrap justify-between gap-6">
-            <div>
-              <p className="font-bold text-white">{SITE_NAME}</p>
-              <p className="mt-1 text-sm text-stone-400">Dřevozpracující provoz</p>
-            </div>
-            <div className="flex flex-wrap gap-4">
-              {NAV_LINKS.map((l) => (
-                <Link key={l.href} href={l.href} className="text-sm text-stone-400 hover:text-white">{l.label}</Link>
-              ))}
-            </div>
-          </div>
-          <div className="mt-8 flex items-center justify-between border-t border-stone-800 pt-6 text-xs text-stone-500">
-            <span>© 2025 {SITE_NAME}</span>
-            <Link href="/admin" className="hover:text-stone-300">Admin</Link>
+      {/* Footer */}
+      <footer style={{ borderTop: `1px solid ${apple.border}`, padding: "32px 22px", background: apple.bg }}>
+        <div style={{ maxWidth: 980, margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 16 }}>
+          <p style={{ fontSize: 13, color: apple.gray }}>© 2025 {SITE_NAME}</p>
+          <div style={{ display: "flex", gap: 24 }}>
+            {NAV_LINKS.map((l) => (
+              <Link key={l.href} href={l.href} style={{ fontSize: 13, color: apple.gray, textDecoration: "none" }}>{l.label}</Link>
+            ))}
+            <Link href="/admin" style={{ fontSize: 13, color: apple.gray, textDecoration: "none" }}>Admin</Link>
           </div>
         </div>
       </footer>

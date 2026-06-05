@@ -13,19 +13,16 @@ const formSchema = dryingPayload.extend({
   contactEmail: z.string().email("Neplatný e-mail").optional().or(z.literal("")),
   note: z.string().max(2000).optional(),
 });
-
 type FormValues = z.infer<typeof formSchema>;
 
-const SPECIES_OPTIONS = [
-  { value: "dub", label: "Dub" },
-  { value: "smrk", label: "Smrk" },
-  { value: "buk", label: "Buk" },
-  { value: "borovice", label: "Borovice" },
+const SPECIES = [
+  { value: "dub", label: "Dub" }, { value: "smrk", label: "Smrk" },
+  { value: "buk", label: "Buk" }, { value: "borovice", label: "Borovice" },
   { value: "jine", label: "Jiná dřevina" },
 ];
 
-const inputClass = "w-full rounded-lg border border-stone-600 bg-stone-800 px-3 py-2 text-sm text-white placeholder-stone-400 focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500";
-const labelClass = "mb-1 block text-sm font-medium text-stone-300";
+const inp = { style: { width: "100%", padding: "12px 16px", fontSize: 15, borderRadius: 12, border: "1px solid #d2d2d7", background: "#fff", color: "#1d1d1f", outline: "none", boxSizing: "border-box" as const, fontFamily: "inherit" }};
+const lbl = { style: { display: "block", fontSize: 14, fontWeight: 500, color: "#1d1d1f", marginBottom: 8 }};
 
 export function DryingForm() {
   const [submitted, setSubmitted] = useState(false);
@@ -51,79 +48,76 @@ export function DryingForm() {
 
   if (submitted) {
     return (
-      <div className="rounded-xl border border-green-700 bg-green-900/40 p-6 text-center">
-        <p className="text-lg font-semibold text-green-300">Děkujeme za poptávku!</p>
-        <p className="mt-2 text-green-400">Ozveme se do 24 hodin na zadané telefonní číslo.</p>
+      <div style={{ background: "#f2fdf4", border: "1px solid #a3e6b3", borderRadius: 16, padding: "28px 24px", textAlign: "center" }}>
+        <p style={{ fontSize: 17, fontWeight: 600, color: "#1a7f37", marginBottom: 8 }}>Děkujeme za poptávku!</p>
+        <p style={{ fontSize: 15, color: "#2da44e" }}>Ozveme se do 24 hodin na zadané telefonní číslo.</p>
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+    <form onSubmit={handleSubmit(onSubmit)} style={{ display: "flex", flexDirection: "column", gap: 20 }}>
       <div>
-        <label className={labelClass}>Dřevina <span className="text-red-500">*</span></label>
-        <select {...register("species")} className={inputClass}>
-          <option value="" className="bg-stone-800">— vyberte —</option>
-          {SPECIES_OPTIONS.map((o) => <option key={o.value} value={o.value} className="bg-stone-800">{o.label}</option>)}
-        </select>
-        {errors.species && <p className="mt-1 text-xs text-red-400">{errors.species.message}</p>}
+        <label {...lbl}>Dřevina <span style={{ color: "#ff3b30" }}>*</span></label>
+        <select {...register("species")} {...inp}><option value="">— vyberte —</option>{SPECIES.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}</select>
+        {errors.species && <p style={{ color: "#ff3b30", fontSize: 13, marginTop: 6 }}>{errors.species.message}</p>}
       </div>
 
       <div>
-        <label className={labelClass}>Objem (m³) <span className="text-red-500">*</span></label>
-        <input type="number" step="0.1" min="0.1" {...register("volumeM3", { valueAsNumber: true })} placeholder="např. 2.5" className={inputClass} />
-        {errors.volumeM3 && <p className="mt-1 text-xs text-red-400">{errors.volumeM3.message}</p>}
+        <label {...lbl}>Objem (m³) <span style={{ color: "#ff3b30" }}>*</span></label>
+        <input type="number" step="0.1" min="0.1" {...register("volumeM3", { valueAsNumber: true })} placeholder="např. 2.5" {...inp} />
+        {errors.volumeM3 && <p style={{ color: "#ff3b30", fontSize: 13, marginTop: 6 }}>{errors.volumeM3.message}</p>}
       </div>
 
       <div>
-        <label className={labelClass}>Výchozí stav dřeva <span className="text-red-500">*</span></label>
-        <div className="flex gap-6">
-          <label className="flex items-center gap-2 text-sm text-stone-300"><input type="radio" value="fresh" {...register("startState")} className="accent-red-500" /> Čerstvé</label>
-          <label className="flex items-center gap-2 text-sm text-stone-300"><input type="radio" value="partially_dry" {...register("startState")} className="accent-red-500" /> Částečně vyschlé</label>
+        <label {...lbl}>Výchozí stav dřeva <span style={{ color: "#ff3b30" }}>*</span></label>
+        <div style={{ display: "flex", gap: 24 }}>
+          <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 15, color: "#1d1d1f", cursor: "pointer" }}><input type="radio" value="fresh" {...register("startState")} /> Čerstvé</label>
+          <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 15, color: "#1d1d1f", cursor: "pointer" }}><input type="radio" value="partially_dry" {...register("startState")} /> Částečně vyschlé</label>
         </div>
       </div>
 
       <div>
-        <label className={labelClass}>Požadovaná vlhkost (%) <span className="text-red-500">*</span></label>
-        <input type="number" min="0" max="100" {...register("targetMoisture", { valueAsNumber: true })} placeholder="např. 12" className={inputClass} />
-        {errors.targetMoisture && <p className="mt-1 text-xs text-red-400">{errors.targetMoisture.message}</p>}
+        <label {...lbl}>Požadovaná vlhkost (%) <span style={{ color: "#ff3b30" }}>*</span></label>
+        <input type="number" min="0" max="100" {...register("targetMoisture", { valueAsNumber: true })} placeholder="např. 12" {...inp} />
+        {errors.targetMoisture && <p style={{ color: "#ff3b30", fontSize: 13, marginTop: 6 }}>{errors.targetMoisture.message}</p>}
       </div>
 
       <div>
-        <label className={labelClass}>Orientační termín (volitelné)</label>
-        <input type="date" {...register("preferredDate")} className={inputClass} />
+        <label {...lbl}>Orientační termín (volitelné)</label>
+        <input type="date" {...register("preferredDate")} {...inp} />
       </div>
 
-      <hr className="border-stone-700" />
-      <p className="text-sm font-semibold text-stone-200">Vaše kontaktní údaje</p>
+      <hr style={{ border: "none", borderTop: "1px solid #d2d2d7", margin: "4px 0" }} />
+      <p style={{ fontSize: 15, fontWeight: 600, color: "#1d1d1f" }}>Vaše kontaktní údaje</p>
 
       <div>
-        <label className={labelClass}>Jméno a příjmení <span className="text-red-500">*</span></label>
-        <input type="text" {...register("contactName")} placeholder="Jan Novák" className={inputClass} />
-        {errors.contactName && <p className="mt-1 text-xs text-red-400">{errors.contactName.message}</p>}
-      </div>
-
-      <div>
-        <label className={labelClass}>Telefon <span className="text-red-500">*</span></label>
-        <input type="tel" {...register("contactPhone")} placeholder="+420 777 123 456" className={inputClass} />
-        {errors.contactPhone && <p className="mt-1 text-xs text-red-400">{errors.contactPhone.message}</p>}
+        <label {...lbl}>Jméno a příjmení <span style={{ color: "#ff3b30" }}>*</span></label>
+        <input type="text" {...register("contactName")} placeholder="Jan Novák" {...inp} />
+        {errors.contactName && <p style={{ color: "#ff3b30", fontSize: 13, marginTop: 6 }}>{errors.contactName.message}</p>}
       </div>
 
       <div>
-        <label className={labelClass}>E-mail (volitelné)</label>
-        <input type="email" {...register("contactEmail")} placeholder="jan@example.cz" className={inputClass} />
-        {errors.contactEmail && <p className="mt-1 text-xs text-red-400">{errors.contactEmail.message}</p>}
+        <label {...lbl}>Telefon <span style={{ color: "#ff3b30" }}>*</span></label>
+        <input type="tel" {...register("contactPhone")} placeholder="+420 777 123 456" {...inp} />
+        {errors.contactPhone && <p style={{ color: "#ff3b30", fontSize: 13, marginTop: 6 }}>{errors.contactPhone.message}</p>}
       </div>
 
       <div>
-        <label className={labelClass}>Poznámka (volitelné)</label>
-        <textarea {...register("note")} rows={3} placeholder="Cokoliv, co nám usnadní přípravu..." className={inputClass} />
+        <label {...lbl}>E-mail (volitelné)</label>
+        <input type="email" {...register("contactEmail")} placeholder="jan@example.cz" {...inp} />
+        {errors.contactEmail && <p style={{ color: "#ff3b30", fontSize: 13, marginTop: 6 }}>{errors.contactEmail.message}</p>}
       </div>
 
-      {serverError && <p className="rounded-lg bg-red-900/40 px-4 py-3 text-sm text-red-300">{serverError}</p>}
+      <div>
+        <label {...lbl}>Poznámka (volitelné)</label>
+        <textarea {...register("note")} rows={3} placeholder="Cokoliv, co nám usnadní přípravu..." style={{ ...inp.style, resize: "vertical" }} />
+      </div>
 
-      <button type="submit" disabled={isSubmitting} className="w-full rounded-xl bg-red-600 px-6 py-3 font-semibold text-white transition hover:bg-red-700 disabled:opacity-50">
-        {isSubmitting ? "Odesílám…" : "Odeslat poptávku — ozveme se s cenou"}
+      {serverError && <div style={{ background: "#fff2f2", border: "1px solid #ffc5c5", borderRadius: 12, padding: "12px 16px", fontSize: 14, color: "#cc0000" }}>{serverError}</div>}
+
+      <button type="submit" disabled={isSubmitting} style={{ width: "100%", padding: "16px", background: isSubmitting ? "#999" : "#0071e3", color: "white", border: "none", borderRadius: 980, fontSize: 16, fontWeight: 500, cursor: isSubmitting ? "not-allowed" : "pointer", fontFamily: "inherit" }}>
+        {isSubmitting ? "Odesílám…" : "Odeslat poptávku"}
       </button>
     </form>
   );
