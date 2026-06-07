@@ -21,8 +21,8 @@ const SPECIES = [
   { value: "jine", label: "Jiná dřevina" },
 ];
 
-const inp = { style: { width: "100%", padding: "12px 16px", fontSize: 15, borderRadius: 12, border: "1px solid #c8bfb0", background: "white", color: "#1a3a2a", outline: "none", boxSizing: "border-box" as const, fontFamily: "var(--font-body)", borderRadius: 0 }};
-const lbl = { style: { display: "block", fontSize: 12, fontWeight: 600, color: "#1a3a2a", marginBottom: 8, textTransform: "uppercase", letterSpacing: "0.06em", fontFamily: "var(--font-heading)" }};
+const inp = { style: { width: "100%", padding: "12px 16px", fontSize: 15, border: "1px solid var(--c-border)", background: "white", color: "var(--c-dark)", outline: "none", boxSizing: "border-box" as const, fontFamily: "var(--font-body)" }};
+const lbl = { style: { display: "block", fontSize: 12, fontWeight: 600, color: "var(--c-dark)", marginBottom: 8, textTransform: "uppercase" as const, letterSpacing: "0.06em", fontFamily: "var(--font-body)" }};
 
 export function DryingForm() {
   const [submitted, setSubmitted] = useState(false);
