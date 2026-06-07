@@ -89,7 +89,7 @@ export default function HomePage() {
 
         {/* Text */}
         <div style={{ position: "relative", zIndex: 1, maxWidth: 1200, margin: "0 auto", padding: "0 40px", width: "100%", marginBottom: "8vh" }}>
-          <p style={{ fontFamily: "var(--font-body)", fontSize: 11, fontWeight: 600, color: "var(--c-gold)", letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: 20 }}>
+          <p style={{ fontFamily: "var(--font-body)", fontSize: 11, fontWeight: 600, color: "rgba(255,255,255,0.75)", letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: 20 }}>
             Profesionální dřevovýroba · Od roku 2000
           </p>
           <h1 style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(36px, 6vw, 80px)", fontWeight: 800, lineHeight: 1.05, color: "#fff", letterSpacing: "-0.03em", marginBottom: 32, maxWidth: 800 }}>
