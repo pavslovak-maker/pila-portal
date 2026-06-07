@@ -116,7 +116,7 @@ export function DryingForm() {
 
       {serverError && <div style={{ background: "#fff2f2", border: "1px solid #ffc5c5", borderRadius: 12, padding: "12px 16px", fontSize: 14, color: "#cc0000" }}>{serverError}</div>}
 
-      <button type="submit" disabled={isSubmitting} style={{ width: "100%", padding: "16px", background: isSubmitting ? "#999" : "#c8441b", color: "white", border: "none", borderRadius: 0, fontSize: 14, letterSpacing: "0.08em", textTransform: "uppercase" as const, fontWeight: 700, fontWeight: 500, cursor: isSubmitting ? "not-allowed" : "pointer", fontFamily: "inherit" }}>
+      <button type="submit" disabled={isSubmitting} style={{ width: "100%", padding: "16px", background: isSubmitting ? "var(--c-text-muted)" : "var(--c-dark)", color: "white", border: "none", fontSize: 13, letterSpacing: "0.1em", textTransform: "uppercase" as const, fontWeight: 600, cursor: isSubmitting ? "not-allowed" : "pointer", fontFamily: "var(--font-body)" }}>
         {isSubmitting ? "Odesílám…" : "Odeslat poptávku"}
       </button>
     </form>
