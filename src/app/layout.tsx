@@ -1,10 +1,6 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/components/CartContext";
-
-const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
-const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Portal pily",
@@ -12,10 +8,9 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const bodyClass = geistSans.variable + " " + geistMono.variable + " min-h-screen antialiased";
   return (
     <html lang="cs">
-      <body className={bodyClass}>
+      <body className="min-h-screen antialiased" style={{ fontFamily: "var(--font-body)", background: "var(--c-cream)", color: "var(--c-text)" }}>
         <CartProvider>
           {children}
         </CartProvider>

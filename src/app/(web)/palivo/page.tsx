@@ -32,46 +32,43 @@ export default async function PalivoPage() {
     .where(eq(products.active, true));
 
   return (
-    <main className="mx-auto max-w-5xl px-4 py-12">
-      <h1 className="text-3xl font-bold tracking-tight text-stone-900">Palivo</h1>
-      <p className="mt-2 text-stone-600">
-        Palivové dřevo, brikety, pelety a štěpka. Objednávka online, platba kartou nebo při
-        převzetí.
+    <main style={{ maxWidth: 1100, margin: "0 auto", padding: "56px 24px", fontFamily: "var(--font-body)" }}>
+      <p style={{ fontFamily: "var(--font-body)", fontSize: 11, fontWeight: 600, color: "var(--c-gold)", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 12 }}>Nabídka</p>
+      <h1 style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(32px, 5vw, 52px)", fontWeight: 600, color: "var(--c-dark)", letterSpacing: "-0.01em", lineHeight: 1.1, marginBottom: 12 }}>Palivo</h1>
+      <p style={{ fontSize: 16, color: "var(--c-text-muted)", lineHeight: 1.7, marginBottom: 48 }}>
+        Palivové dřevo, brikety, pelety a štěpka. Objednávka online, platba kartou nebo při převzetí.
       </p>
 
       {items.length === 0 ? (
-        <p className="mt-12 text-center text-stone-400">
+        <p style={{ textAlign: "center", color: "var(--c-text-muted)", marginTop: 48 }}>
           Momentálně nemáme žádné produkty v nabídce.
         </p>
       ) : (
-        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div style={{ display: "grid", gap: 24, gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))" }}>
           {items.map((p) => (
             <div
               key={p.id}
-              className="flex flex-col rounded-xl border border-stone-200 bg-white p-5 shadow-sm"
+              style={{ display: "flex", flexDirection: "column", border: "1px solid var(--c-border)", background: "var(--c-cream-dark)", padding: 24 }}
             >
-              {/* Placeholder pro fotku */}
-              <div className="mb-4 flex h-36 items-center justify-center rounded-lg bg-stone-100 text-4xl">
+              <div style={{ marginBottom: 16, height: 140, display: "flex", alignItems: "center", justifyContent: "center", background: "var(--c-cream)", border: "1px solid var(--c-border)", fontSize: 40 }}>
                 🪵
               </div>
 
-              <h2 className="font-semibold text-stone-900">{p.name}</h2>
+              <h2 style={{ fontFamily: "var(--font-heading)", fontSize: 22, fontWeight: 600, color: "var(--c-dark)", marginBottom: 4 }}>{p.name}</h2>
               {p.description && (
-                <p className="mt-1 text-sm text-stone-500">{p.description}</p>
+                <p style={{ fontSize: 14, color: "var(--c-text-muted)", lineHeight: 1.6, marginBottom: 8 }}>{p.description}</p>
               )}
 
-              <div className="mt-3 flex items-end justify-between">
+              <div style={{ marginTop: "auto", paddingTop: 16, borderTop: "1px solid var(--c-border)", display: "flex", alignItems: "flex-end", justifyContent: "space-between" }}>
                 <div>
-                  <span className="text-xl font-bold text-amber-700">
+                  <span style={{ fontFamily: "var(--font-heading)", fontSize: 24, fontWeight: 600, color: "var(--c-gold)" }}>
                     {formatPrice(p.priceB2c)}
                   </span>
-                  <span className="ml-1 text-sm text-stone-400">
+                  <span style={{ fontSize: 13, color: "var(--c-text-muted)", marginLeft: 4 }}>
                     / {UNIT_LABELS[p.unit] ?? p.unit}
                   </span>
                 </div>
-                <span
-                  className={`text-xs ${p.stock > 0 ? "text-green-600" : "text-red-500"}`}
-                >
+                <span style={{ fontSize: 12, color: p.stock > 0 ? "#6B7A5A" : "#A05A5A" }}>
                   {p.stock > 0 ? `Skladem (${p.stock})` : "Vyprodáno"}
                 </span>
               </div>
@@ -86,7 +83,7 @@ export default async function PalivoPage() {
               ) : (
                 <button
                   disabled
-                  className="mt-4 w-full rounded-lg bg-stone-200 px-4 py-2 text-sm font-semibold text-stone-400"
+                  style={{ marginTop: 16, width: "100%", background: "var(--c-border)", color: "var(--c-text-muted)", padding: "10px 16px", fontSize: 13, fontWeight: 600, border: "none", cursor: "not-allowed" }}
                 >
                   Vyprodáno
                 </button>

@@ -1,15 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
 :root {
-  --c-cream: #f5f0e8;
-  --c-green: #1a3a2a;
-  --c-green-mid: #2d5a40;
-  --c-orange: #c8441b;
-  --c-text: #1a2e1f;
-  --c-gray: #6b7c6e;
-  --c-border: #d9d0c2;
-  --font-heading: 'Oswald', sans-serif;
+  /* Primární paleta — prémiový řemeslný styl */
+  --c-cream: #f5f0e8;        /* teplá krémová — pozadí */
+  --c-cream-dark: #ede7d9;   /* o stupeň tmavší krémová — sekce, karty */
+  --c-dark: #2C1A0E;         /* tmavě hnědá — hlavní barva textu a prvků */
+  --c-anthracite: #3D3835;   /* antracit/tmavě šedohnědá — sekundární tmavá */
+  --c-gold: #B8965A;         /* zlatá/měděná — akcent */
+  --c-gold-light: #D4AF7A;   /* světlejší zlatá — hover, detaily */
+  --c-text: #2C1A0E;         /* hlavní text */
+  --c-text-muted: #7A6A5A;   /* sekundární text */
+  --c-border: #d9d0c2;       /* tenké linky */
+  --font-heading: 'Inter', -apple-system, sans-serif;
   --font-body: 'Inter', -apple-system, sans-serif;
 }
 

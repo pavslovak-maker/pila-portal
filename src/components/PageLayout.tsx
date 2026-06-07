@@ -5,7 +5,6 @@ import { useState } from "react";
 
 const PHONE = process.env.NEXT_PUBLIC_SITE_PHONE ?? "+420 000 000 000";
 const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME ?? "Pila";
-const g = "#1a3a2a", o = "#c8441b", cr = "#f5f0e8";
 
 const NAV = [
   { href: "/porez", label: "Pořez dřeva" },
@@ -18,38 +17,52 @@ export function PageLayout({ children }: { children: React.ReactNode }) {
   const [menu, setMenu] = useState(false);
 
   return (
-    <div style={{ minHeight: "100vh", background: cr, fontFamily: "var(--font-body)" }}>
-      <div style={{ background: o, color: "white", textAlign: "center", padding: "8px", fontSize: 13, fontWeight: 500, letterSpacing: "0.05em" }}>
-        Zavolejte nám: {PHONE}
+    <div style={{ minHeight: "100vh", background: "var(--c-cream)", fontFamily: "var(--font-body)" }}>
+
+      {/* Top bar */}
+      <div style={{ background: "var(--c-dark)", color: "var(--c-gold)", textAlign: "center", padding: "7px 16px", fontSize: 12, fontWeight: 500, letterSpacing: "0.1em" }}>
+        Zavolejte nám: <strong style={{ color: "#fff" }}>{PHONE}</strong>
       </div>
-      <header style={{ background: cr, borderBottom: `1px solid #d9d0c2`, position: "sticky", top: 0, zIndex: 50 }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px", display: "flex", alignItems: "center", justifyContent: "space-between", height: 64 }}>
+
+      {/* Nav */}
+      <header style={{ background: "var(--c-cream)", borderBottom: "1px solid var(--c-border)", position: "sticky", top: 0, zIndex: 50 }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px", display: "flex", alignItems: "center", justifyContent: "space-between", height: 60 }}>
+
           <Link href="/" style={{ textDecoration: "none" }}>
-            <div style={{ background: g, color: "white", padding: "8px 14px", lineHeight: 1.1 }}>
-              <div style={{ fontFamily: "var(--font-heading)", fontSize: 15, fontWeight: 700, letterSpacing: "0.08em" }}>{SITE_NAME.toUpperCase()}</div>
-              <div style={{ fontFamily: "var(--font-heading)", fontSize: 11, fontWeight: 400, color: o, letterSpacing: "0.15em" }}>DŘEVOZPRACUJÍCÍ PROVOZ</div>
+            <div style={{ lineHeight: 1.15 }}>
+              <div style={{ fontFamily: "var(--font-heading)", fontSize: 20, fontWeight: 700, color: "var(--c-dark)", letterSpacing: "-0.02em" }}>{SITE_NAME}</div>
+              <div style={{ fontFamily: "var(--font-body)", fontSize: 9, fontWeight: 600, color: "var(--c-gold)", letterSpacing: "0.22em", textTransform: "uppercase" }}>Dřevozpracující provoz</div>
             </div>
           </Link>
-          <nav className="hidden md:flex" style={{ gap: 28 }}>
-            {NAV.map(l => <Link key={l.href} href={l.href} style={{ textDecoration: "none", fontSize: 13, fontWeight: 500, color: g, textTransform: "uppercase", letterSpacing: "0.04em" }}>{l.label}</Link>)}
+
+          <nav className="hidden md:flex" style={{ gap: 32, alignItems: "center" }}>
+            {NAV.map(l => (
+              <Link key={l.href} href={l.href} style={{ textDecoration: "none", fontSize: 12, fontWeight: 500, color: "var(--c-dark)", letterSpacing: "0.07em", textTransform: "uppercase" }}>{l.label}</Link>
+            ))}
           </nav>
-          <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
-            <Link href="/suseni" className="hidden sm:block" style={{ background: o, color: "white", padding: "10px 20px", fontSize: 13, fontWeight: 700, textDecoration: "none", textTransform: "uppercase", letterSpacing: "0.06em" }}>
-              Poptávka zdarma
+
+          <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+            <Link href="/poptavka" className="hidden sm:block" style={{ border: "1px solid var(--c-dark)", color: "var(--c-dark)", padding: "8px 18px", fontSize: 11, fontWeight: 600, textDecoration: "none", letterSpacing: "0.1em", textTransform: "uppercase" }}>
+              Poptávka
             </Link>
-            <button onClick={() => setMenu(!menu)} className="md:hidden" style={{ background: "none", border: "none", cursor: "pointer" }}>
-              <div style={{ width: 24, display: "flex", flexDirection: "column", gap: 5 }}>
-                {[0,1,2].map(i => <span key={i} style={{ display: "block", height: 2, background: g, borderRadius: 1 }} />)}
+            <button onClick={() => setMenu(!menu)} className="md:hidden" style={{ background: "none", border: "none", cursor: "pointer", padding: 4 }}>
+              <div style={{ width: 22, display: "flex", flexDirection: "column", gap: 5 }}>
+                {[0, 1, 2].map(i => <span key={i} style={{ display: "block", height: 1.5, background: "var(--c-dark)" }} />)}
               </div>
             </button>
           </div>
         </div>
+
         {menu && (
-          <div className="md:hidden" style={{ background: cr, borderTop: `1px solid #d9d0c2`, padding: "12px 24px 20px" }}>
-            {NAV.map(l => <Link key={l.href} href={l.href} onClick={() => setMenu(false)} style={{ display: "block", padding: "12px 0", fontSize: 14, fontWeight: 600, color: g, textDecoration: "none", borderBottom: "1px solid #e8e2d8", textTransform: "uppercase", letterSpacing: "0.05em" }}>{l.label}</Link>)}
+          <div className="md:hidden" style={{ background: "var(--c-cream)", borderTop: "1px solid var(--c-border)", padding: "10px 24px 20px" }}>
+            {NAV.map(l => (
+              <Link key={l.href} href={l.href} onClick={() => setMenu(false)} style={{ display: "block", padding: "12px 0", fontSize: 13, fontWeight: 500, color: "var(--c-dark)", textDecoration: "none", borderBottom: "1px solid var(--c-border)", textTransform: "uppercase", letterSpacing: "0.07em" }}>{l.label}</Link>
+            ))}
+            <Link href="/poptavka" style={{ display: "block", marginTop: 16, textAlign: "center", border: "1px solid var(--c-dark)", color: "var(--c-dark)", padding: "12px", fontSize: 12, fontWeight: 600, textDecoration: "none", letterSpacing: "0.08em", textTransform: "uppercase" }}>Poptávka zdarma</Link>
           </div>
         )}
       </header>
+
       <main style={{ maxWidth: 680, margin: "0 auto", padding: "56px 24px" }}>
         {children}
       </main>
