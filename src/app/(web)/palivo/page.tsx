@@ -3,6 +3,7 @@ import { products } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { AddToCartButton } from "@/components/AddToCartButton";
 import { CartNav } from "@/components/CartNav";
+import { PageLayout } from "@/components/PageLayout";
 
 export const metadata = {
   title: "Palivové dřevo a brikety | Portál pily",
@@ -32,43 +33,43 @@ export default async function PalivoPage() {
     .where(eq(products.active, true));
 
   return (
-    <main style={{ maxWidth: 1100, margin: "0 auto", padding: "56px 24px", fontFamily: "var(--font-body)" }}>
+    <PageLayout>
       <p style={{ fontFamily: "var(--font-body)", fontSize: 11, fontWeight: 600, color: "var(--c-gold)", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 12 }}>Nabídka</p>
-      <h1 style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(32px, 5vw, 52px)", fontWeight: 600, color: "var(--c-dark)", letterSpacing: "-0.01em", lineHeight: 1.1, marginBottom: 12 }}>Palivo</h1>
-      <p style={{ fontSize: 16, color: "var(--c-text-muted)", lineHeight: 1.7, marginBottom: 48 }}>
+      <h1 style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(28px, 5vw, 48px)", fontWeight: 800, color: "#fff", letterSpacing: "-0.03em", lineHeight: 1.05, marginBottom: 12 }}>Palivo</h1>
+      <p style={{ fontSize: 16, color: "rgba(255,255,255,0.55)", lineHeight: 1.7, marginBottom: 48 }}>
         Palivové dřevo, brikety, pelety a štěpka. Objednávka online, platba kartou nebo při převzetí.
       </p>
 
       {items.length === 0 ? (
-        <p style={{ textAlign: "center", color: "var(--c-text-muted)", marginTop: 48 }}>
+        <p style={{ textAlign: "center", color: "rgba(255,255,255,0.4)", marginTop: 48 }}>
           Momentálně nemáme žádné produkty v nabídce.
         </p>
       ) : (
-        <div style={{ display: "grid", gap: 24, gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))" }}>
+        <div style={{ display: "grid", gap: 16, gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))" }}>
           {items.map((p) => (
             <div
               key={p.id}
-              style={{ display: "flex", flexDirection: "column", border: "1px solid var(--c-border)", background: "var(--c-cream-dark)", padding: 24 }}
+              style={{ display: "flex", flexDirection: "column", border: "1px solid rgba(255,255,255,0.1)", background: "rgba(255,255,255,0.04)", padding: 24 }}
             >
-              <div style={{ marginBottom: 16, height: 140, display: "flex", alignItems: "center", justifyContent: "center", background: "var(--c-cream)", border: "1px solid var(--c-border)", fontSize: 40 }}>
+              <div style={{ marginBottom: 16, height: 120, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", fontSize: 36 }}>
                 🪵
               </div>
 
-              <h2 style={{ fontFamily: "var(--font-heading)", fontSize: 22, fontWeight: 600, color: "var(--c-dark)", marginBottom: 4 }}>{p.name}</h2>
+              <h2 style={{ fontFamily: "var(--font-heading)", fontSize: 20, fontWeight: 700, color: "#fff", marginBottom: 4 }}>{p.name}</h2>
               {p.description && (
-                <p style={{ fontSize: 14, color: "var(--c-text-muted)", lineHeight: 1.6, marginBottom: 8 }}>{p.description}</p>
+                <p style={{ fontSize: 14, color: "rgba(255,255,255,0.5)", lineHeight: 1.6, marginBottom: 8 }}>{p.description}</p>
               )}
 
-              <div style={{ marginTop: "auto", paddingTop: 16, borderTop: "1px solid var(--c-border)", display: "flex", alignItems: "flex-end", justifyContent: "space-between" }}>
+              <div style={{ marginTop: "auto", paddingTop: 16, borderTop: "1px solid rgba(255,255,255,0.08)", display: "flex", alignItems: "flex-end", justifyContent: "space-between" }}>
                 <div>
-                  <span style={{ fontFamily: "var(--font-heading)", fontSize: 24, fontWeight: 600, color: "var(--c-gold)" }}>
+                  <span style={{ fontFamily: "var(--font-heading)", fontSize: 22, fontWeight: 700, color: "var(--c-gold)" }}>
                     {formatPrice(p.priceB2c)}
                   </span>
-                  <span style={{ fontSize: 13, color: "var(--c-text-muted)", marginLeft: 4 }}>
+                  <span style={{ fontSize: 13, color: "rgba(255,255,255,0.4)", marginLeft: 4 }}>
                     / {UNIT_LABELS[p.unit] ?? p.unit}
                   </span>
                 </div>
-                <span style={{ fontSize: 12, color: p.stock > 0 ? "#6B7A5A" : "#A05A5A" }}>
+                <span style={{ fontSize: 12, color: p.stock > 0 ? "#8aac6a" : "#ac6a6a" }}>
                   {p.stock > 0 ? `Skladem (${p.stock})` : "Vyprodáno"}
                 </span>
               </div>
@@ -83,7 +84,7 @@ export default async function PalivoPage() {
               ) : (
                 <button
                   disabled
-                  style={{ marginTop: 16, width: "100%", background: "var(--c-border)", color: "var(--c-text-muted)", padding: "10px 16px", fontSize: 13, fontWeight: 600, border: "none", cursor: "not-allowed" }}
+                  style={{ marginTop: 16, width: "100%", background: "rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.3)", padding: "10px 16px", fontSize: 13, fontWeight: 600, border: "1px solid rgba(255,255,255,0.08)", cursor: "not-allowed" }}
                 >
                   Vyprodáno
                 </button>
@@ -94,6 +95,6 @@ export default async function PalivoPage() {
       )}
 
       <CartNav />
-    </main>
+    </PageLayout>
   );
 }
