@@ -5,8 +5,8 @@ export default function Page() {
   return (
     <PageLayout>
       <p style={{ fontFamily: "var(--font-body)", fontSize: 11, fontWeight: 600, color: "var(--c-gold)", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 12 }}>Poptávka</p>
-      <h1 style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(28px, 5vw, 48px)", fontWeight: 800, color: "var(--c-dark)", letterSpacing: "-0.03em", lineHeight: 1.05, marginBottom: 16 }}>Sušení dřeva</h1>
-      <p style={{ fontSize: 16, color: "var(--c-text-muted)", lineHeight: 1.7, marginBottom: 40 }}>Sušíme dřevo v moderní komorové sušárně. Výsledkem je stabilní řezivo s přesnou vlhkostí.</p>
+      <h1 style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(28px, 5vw, 48px)", fontWeight: 800, color: "#fff", letterSpacing: "-0.03em", lineHeight: 1.05, marginBottom: 16 }}>Sušení dřeva</h1>
+      <p style={{ fontSize: 16, color: "rgba(255,255,255,0.55)", lineHeight: 1.7, marginBottom: 40 }}>Sušíme dřevo v moderní komorové sušárně. Výsledkem je stabilní řezivo s přesnou vlhkostí.</p>
       <DryingForm />
     </PageLayout>
   );

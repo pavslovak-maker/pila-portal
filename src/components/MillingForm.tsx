@@ -21,8 +21,8 @@ const SPECIES = [
   { value: "jine", label: "Jiná dřevina" },
 ];
 
-const inp = { style: { width: "100%", padding: "12px 16px", fontSize: 15, border: "1px solid var(--c-border)", background: "white", color: "var(--c-dark)", outline: "none", boxSizing: "border-box" as const, fontFamily: "var(--font-body)" }};
-const lbl = { style: { display: "block", fontSize: 12, fontWeight: 600, color: "var(--c-dark)", marginBottom: 8, textTransform: "uppercase" as const, letterSpacing: "0.06em", fontFamily: "var(--font-body)" }};
+const inp = { style: { width: "100%", padding: "12px 16px", fontSize: 15, border: "1px solid rgba(255,255,255,0.12)", background: "rgba(255,255,255,0.06)", color: "#fff", outline: "none", boxSizing: "border-box" as const, fontFamily: "var(--font-body)" }};
+const lbl = { style: { display: "block", fontSize: 12, fontWeight: 600, color: "rgba(255,255,255,0.6)", marginBottom: 8, textTransform: "uppercase" as const, letterSpacing: "0.06em", fontFamily: "var(--font-body)" }};
 
 export function MillingForm() {
   const [submitted, setSubmitted] = useState(false);
