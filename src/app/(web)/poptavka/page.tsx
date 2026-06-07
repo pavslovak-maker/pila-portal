@@ -16,10 +16,10 @@ export default function PoptavkaPage() {
       <p style={{ fontFamily: "var(--font-body)", fontSize: 11, fontWeight: 600, color: "var(--c-gold)", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 12 }}>
         Nezávazná poptávka
       </p>
-      <h1 style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(32px, 5vw, 52px)", fontWeight: 600, color: "var(--c-dark)", letterSpacing: "-0.01em", lineHeight: 1.1, marginBottom: 12 }}>
+      <h1 style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(28px, 5vw, 48px)", fontWeight: 800, color: "#fff", letterSpacing: "-0.03em", lineHeight: 1.05, marginBottom: 12 }}>
         O co máte zájem?
       </h1>
-      <p style={{ fontSize: 15, color: "var(--c-text-muted)", lineHeight: 1.7, marginBottom: 48 }}>
+      <p style={{ fontSize: 15, color: "rgba(255,255,255,0.55)", lineHeight: 1.7, marginBottom: 48 }}>
         Vyberte službu, o kterou máte zájem, a vyplňte poptávkový formulář. Ozveme se do 24 hodin.
       </p>
 
@@ -34,19 +34,17 @@ export default function PoptavkaPage() {
               justifyContent: "space-between",
               gap: 24,
               padding: "28px 0",
-              borderTop: "1px solid var(--c-border)",
-              borderBottom: i === SERVICES.length - 1 ? "1px solid var(--c-border)" : "none",
+              borderTop: "1px solid rgba(255,255,255,0.1)",
+              borderBottom: i === SERVICES.length - 1 ? "1px solid rgba(255,255,255,0.1)" : "none",
               textDecoration: "none",
             }}
           >
-            <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-              <div>
-                <div style={{ fontFamily: "var(--font-heading)", fontSize: 24, fontWeight: 600, color: "var(--c-dark)", marginBottom: 4 }}>
-                  {s.label}
-                </div>
-                <div style={{ fontSize: 14, color: "var(--c-text-muted)", lineHeight: 1.5 }}>
-                  {s.desc}
-                </div>
+            <div>
+              <div style={{ fontFamily: "var(--font-heading)", fontSize: 22, fontWeight: 700, color: "#fff", marginBottom: 4 }}>
+                {s.label}
+              </div>
+              <div style={{ fontSize: 14, color: "rgba(255,255,255,0.5)", lineHeight: 1.5 }}>
+                {s.desc}
               </div>
             </div>
             <span style={{ color: "var(--c-gold)", fontSize: 20, flexShrink: 0 }}>→</span>
