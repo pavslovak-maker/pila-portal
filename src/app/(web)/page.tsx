@@ -73,7 +73,7 @@ export default function HomePage() {
       </header>
 
       {/* HERO */}
-      <section style={{ position: "relative", height: "88vh", minHeight: 480, display: "flex", alignItems: "flex-end" }}>
+      <section style={{ position: "relative", height: "88vh", minHeight: 480, display: "flex", alignItems: "center" }}>
         {/* Foto pozadí */}
         <div style={{
           position: "absolute", inset: 0,
@@ -88,7 +88,7 @@ export default function HomePage() {
         }} />
 
         {/* Text */}
-        <div style={{ position: "relative", zIndex: 1, maxWidth: 1200, margin: "0 auto", padding: "0 40px 72px", width: "100%" }}>
+        <div style={{ position: "relative", zIndex: 1, maxWidth: 1200, margin: "0 auto", padding: "0 40px", width: "100%", marginBottom: "8vh" }}>
           <p style={{ fontFamily: "var(--font-body)", fontSize: 11, fontWeight: 600, color: "var(--c-gold)", letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: 20 }}>
             Profesionální dřevovýroba · Od roku 2000
           </p>
